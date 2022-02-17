@@ -13,6 +13,7 @@ pipeline {
         }
 
         stage('Build') {
+
             steps {
                 echo 'Building..'
                 sh '''
@@ -37,10 +38,6 @@ pipeline {
             when{changeRequest()}
             steps {
                 echo 'Testing..'
-                sh '''
-                exit 1
-                '''
-
             }
         }
         stage('Deploy') {
