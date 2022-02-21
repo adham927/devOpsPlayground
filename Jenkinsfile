@@ -79,7 +79,7 @@ pipeline {
         always {
             emailext (
                 subject: email_subject,
-                mimetype: 'text/html',
+                mimeType: 'text/html',
                 to: 'ad.amer1989@gmail.com',
                 recipientProviders: [[$class: 'CulpritsRecipientProvider'],[$class: 'RequesterRecipientProvider']],
                 body: 'test'
