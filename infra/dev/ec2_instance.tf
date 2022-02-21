@@ -21,5 +21,6 @@ resource "aws_instance" "app_server" {
 
   tags = {
     Name = "TerraformEc2DemoAdhamV2"
+
   }
 }
