@@ -77,7 +77,13 @@ pipeline {
     }
      post {
         always {
-            emailext body: 'A Test EMail',  to: 'ad.amer1989@gmail.com', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
+            emailext (
+                subject: email_subject,
+                mimetype: 'text/html',
+                to: 'ad.amer1989@gmail.com',
+                recipientProviders: [[$class: 'CulpritsRecipientProvider'],[$class: 'RequesterRecipientProvider']],
+                body: 'test'
+            )
         }
     }
 }
