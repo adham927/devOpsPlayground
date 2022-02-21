@@ -64,7 +64,7 @@ pipeline {
                 terraform plan
                 terraform apply -auto-approve
                 '''
-                copyArtifacts filter: 'infra/dev/terraform.tfstate', projectName: 'ec2_instance.tf'
+                copyArtifacts filter: 'infra/dev/terraform.tfstate', projectName: 'infra/dev/ec2_instance.tf'
                 archiveArtifacts artifacts: 'infra/dev/terraform.tfstate', onlyIfSuccessful: true
                 //echo 'Provisioning....'
 
