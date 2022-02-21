@@ -57,25 +57,19 @@ pipeline {
             }
             when { allOf { branch "dev"; changeset "infra/**/*.tf"} }
             steps {
+                copyArtifacts filter: 'infra/dev/terraform.tfstate', projectName: '${JOB_NAME}'
                 sh'''
                 cd infra/dev/
                 terraform init
                 terraform plan
                 terraform apply -auto-approve
-
                 '''
-                // copyArtifacts filter: 'infra/dev/terraform.tfstate', projectName: '${JOB_NAME}'
-                echo 'Provisioning....'
-                // archiveArtifacts artifacts: 'infra/dev/terraform.tfstate', onlyIfSuccessful: true
+                archiveArtifacts artifacts: 'infra/dev/terraform.tfstate', onlyIfSuccessful: true
+                //echo 'Provisioning....'
+
             }
         }
 
 
-    }
-
-    post {
-        always {
-            emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
-        }
     }
 }
