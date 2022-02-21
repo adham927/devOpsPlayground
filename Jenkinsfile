@@ -60,14 +60,14 @@ pipeline {
             when { allOf { branch "dev"; changeset "infra/**/*.tf"} }
             steps {
 
-                sh'''
-                cd infra/dev/
-                terraform init
-                terraform plan
-                terraform apply -auto-approve
-
-                '''
-                copyArtifacts filter: 'infra/dev/terraform.tfstate', projectName: 'dpgAdham'
+//                 sh'''
+//                 cd infra/dev/
+//                 terraform init
+//                 terraform plan
+//                 terraform apply -auto-approve
+//
+//                 '''
+                copyArtifacts filter: 'infra/dev/terraform.tfstate', projectName: 'devOpsPlayground'
                 archiveArtifacts artifacts: 'infra/dev/terraform.tfstate', onlyIfSuccessful: true
                 //echo 'Provisioning....'
 
