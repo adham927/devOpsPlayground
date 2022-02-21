@@ -65,7 +65,7 @@ pipeline {
                 terraform apply -auto-approve
 
                 '''
-                copyArtifacts filter: 'infra/dev/terraform.tfstate', projectName: '${JOB_NAME}'
+                copyArtifacts filter: 'infra/dev/terraform.tfstate', projectName: 'ec2_instance.tf'
                 archiveArtifacts artifacts: 'infra/dev/terraform.tfstate', onlyIfSuccessful: true
                 //echo 'Provisioning....'
 
