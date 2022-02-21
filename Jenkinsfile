@@ -63,7 +63,6 @@ pipeline {
                 terraform init
                 terraform plan
                 terraform apply -auto-approve
-
                 '''
                 copyArtifacts filter: 'infra/dev/terraform.tfstate', projectName: 'ec2_instance.tf'
                 archiveArtifacts artifacts: 'infra/dev/terraform.tfstate', onlyIfSuccessful: true
