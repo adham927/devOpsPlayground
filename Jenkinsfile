@@ -51,10 +51,11 @@ pipeline {
             }
         }
         stage('Provision') {
-            when { allOf {changeset "infra/**/*.tf"; branch "dev"} }
+
             input {
                 message "Do you want to proceed for infrastructure provisioning?"
             }
+            when { allOf { branch "dev"; changeset "infra/**/*.tf"} }
             steps {
                 sh'''
                 cd infra/dev/
