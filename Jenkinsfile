@@ -60,13 +60,13 @@ pipeline {
             when { allOf { branch "dev"; changeset "infra/**/*.tf"} }
             steps {
 
-//                 sh'''
-//                 cd infra/dev/
-//                 terraform init
-//                 terraform plan
-//                 terraform apply -auto-approve
-//
-//                 '''
+                sh'''
+                cd infra/dev/
+                terraform init
+                terraform plan
+                terraform apply -auto-approve
+
+                '''
                 copyArtifacts filter: 'infra/dev/terraform.tfstate', projectName: 'http://52.89.155.82:8080/blue/organizations/jenkins/devOpsPlayground/activity'
                 archiveArtifacts artifacts: 'infra/dev/terraform.tfstate', onlyIfSuccessful: true
                 //echo 'Provisioning....'
