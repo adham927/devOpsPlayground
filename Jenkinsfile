@@ -57,7 +57,7 @@ pipeline {
             }
             when { allOf { branch "dev"; changeset "infra/**/*.tf"} }
             steps {
-                copyArtifacts filter: 'infra/dev/terraform.tfstate', projectName: '${JOB_NAME}'
+
                 sh'''
                 cd infra/dev/
                 terraform init
@@ -65,6 +65,7 @@ pipeline {
                 terraform apply -auto-approve
 
                 '''
+                copyArtifacts filter: 'infra/dev/terraform.tfstate', projectName: '${JOB_NAME}'
                 archiveArtifacts artifacts: 'infra/dev/terraform.tfstate', onlyIfSuccessful: true
                 //echo 'Provisioning....'
 
