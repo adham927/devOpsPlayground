@@ -1,8 +1,5 @@
 pipeline {
     agent any
-     options {
-        copyArtifactPermission('${JOB_NAME}');
-    }
     stages {
         stage('login'){
 
@@ -72,11 +69,10 @@ pipeline {
 
             }
         }
-        post {
+    }
+    post {
         always {
             emailext body: 'A Test EMail', recipientProviders: [[$class: 'ad.amer1989@gmail.com'], [$class: 'ad.amer1989@gmail.com']], subject: 'Test'
         }
-    }
-
     }
 }
