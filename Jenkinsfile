@@ -40,10 +40,30 @@ pipeline {
                 echo 'Testing..'
             }
         }
-        stage('Deploy') {
+        stage('Deploy - dev') {
             steps {
                 echo 'Deploying....'
-
+            }
+        }
+        stage('Deploy - prod') {
+            steps {
+                echo 'Deploying....'
+            }
+        }
+        stage('Provision') {
+            when { allOf {changeset "infra/**/*.tf"; branch "dev"} }
+            input {
+                message "Do you want to proceed for infrastructure provisioning?"
+            }
+            steps {
+                sh'''
+                terraform init infra/dev/ec2_instance.tf
+                terraform plan
+                terraform apply
+                '''
+                // copyArtifacts filter: 'infra/dev/terraform.tfstate', projectName: '${JOB_NAME}'
+//                 echo 'Provisioning....'
+                // archiveArtifacts artifacts: 'infra/dev/terraform.tfstate', onlyIfSuccessful: true
             }
         }
     }
