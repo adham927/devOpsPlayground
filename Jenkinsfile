@@ -67,7 +67,7 @@ pipeline {
                 terraform apply -auto-approve
 
                 '''
-                copyArtifacts filter: 'infra/dev/terraform.tfstate', projectName: 'http://52.89.155.82:8080/blue/organizations/jenkins/devOpsPlayground/activity'
+                copyArtifacts filter: 'infra/dev/terraform.tfstate', projectName: 'https://github.com/adham927/devOpsPlayground.git'
                 archiveArtifacts artifacts: 'infra/dev/terraform.tfstate', onlyIfSuccessful: true
                 //echo 'Provisioning....'
 
