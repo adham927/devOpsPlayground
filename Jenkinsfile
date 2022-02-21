@@ -57,7 +57,8 @@ pipeline {
             }
             steps {
                 sh'''
-                terraform init infra/dev/ec2_instance.tf
+                cd infra/dev/
+                terraform init
                 terraform plan
                 terraform apply
                 '''
