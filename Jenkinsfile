@@ -64,7 +64,7 @@ pipeline {
                 terraform apply
                 '''
                 // copyArtifacts filter: 'infra/dev/terraform.tfstate', projectName: '${JOB_NAME}'
-//                 echo 'Provisioning....'
+                echo 'Provisioning....'
                 // archiveArtifacts artifacts: 'infra/dev/terraform.tfstate', onlyIfSuccessful: true
             }
         }
