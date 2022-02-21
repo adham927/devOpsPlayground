@@ -60,7 +60,7 @@ pipeline {
                 cd infra/dev/
                 terraform init
                 terraform plan
-                terraform -y apply
+                terraform -yes apply
                 '''
                 // copyArtifacts filter: 'infra/dev/terraform.tfstate', projectName: '${JOB_NAME}'
 //                 echo 'Provisioning....'
