@@ -16,7 +16,7 @@ provider "aws" {
 
 resource "aws_instance" "app_server" {
   # this ami according to product spec
-  ami           = "ami-0b0af3577fe5e3532"
+  ami           = "ami-0341aeea105412b57"
 
   instance_type = "t2.micro"
 
