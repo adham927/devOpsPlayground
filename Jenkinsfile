@@ -1,6 +1,8 @@
 pipeline {
     agent any
-
+     options {
+        copyArtifactPermission('${JOB_NAME}');
+    }
     stages {
         stage('login'){
 
@@ -63,8 +65,9 @@ pipeline {
                 terraform init
                 terraform plan
                 terraform apply -auto-approve
+
                 '''
-                copyArtifacts filter: 'infra/dev/terraform.tfstate', projectName: 'env.JOB_NAME'
+                copyArtifacts filter: 'infra/dev/terraform.tfstate', projectName: '${JOB_NAME}'
                 archiveArtifacts artifacts: 'infra/dev/terraform.tfstate', onlyIfSuccessful: true
                 //echo 'Provisioning....'
 
