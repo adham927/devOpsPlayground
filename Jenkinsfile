@@ -65,7 +65,6 @@ pipeline {
                 terraform init
                 terraform plan
                 terraform apply -auto-approve
-
                 '''
                 copyArtifacts filter: 'infra/dev/terraform.tfstate', projectName: 'https://github.com/adham927/devOpsPlayground.git'
                 archiveArtifacts artifacts: 'infra/dev/terraform.tfstate', onlyIfSuccessful: true
