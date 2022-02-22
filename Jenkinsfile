@@ -66,8 +66,8 @@ pipeline {
                 terraform plan
                 terraform apply -auto-approve
                 '''
-                copyArtifacts filter: 'infra/dev/terraform.tfstate', projectName: 'https://github.com/adham927/devOpsPlayground.git'
-                archiveArtifacts artifacts: 'infra/dev/terraform.tfstate', onlyIfSuccessful: true
+//                 copyArtifacts filter: 'infra/dev/terraform.tfstate', projectName: '${JOB_NAME}'
+//                 archiveArtifacts artifacts: 'infra/dev/terraform.tfstate', onlyIfSuccessful: true
                 //echo 'Provisioning....'
 
             }
@@ -75,15 +75,15 @@ pipeline {
 
 
     }
-     post {
-        always {
-            emailext (
-                subject: 'email subject',
-                mimeType: 'text/html',
-                to: 'ad.amer1989@gmail.com',
-                recipientProviders: [[$class: 'CulpritsRecipientProvider'],[$class: 'RequesterRecipientProvider']],
-                body: 'test'
-            )
-        }
-    }
+//      post {
+//         always {
+//             emailext (
+//                 subject: 'email subject',
+//                 mimeType: 'text/html',
+//                 to: 'ad.amer1989@gmail.com',
+//                 recipientProviders: [[$class: 'CulpritsRecipientProvider'],[$class: 'RequesterRecipientProvider']],
+//                 body: 'test'
+//             )
+//         }
+//     }
 }
