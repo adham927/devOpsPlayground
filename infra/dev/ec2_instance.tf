@@ -20,7 +20,7 @@ resource "aws_instance" "app_server" {
   instance_type = "t2.micro"
 
   tags = {
-    Name = "TerraformEc2DemoAdhamV4"
+    Name = "TerraformEc2DemoAdhamV5"
 
   }
 }

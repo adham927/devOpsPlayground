@@ -61,14 +61,15 @@ pipeline {
             steps {
 
                 sh'''
+                copyArtifacts filter: 'infra/dev/terraform.tfstate', projectName: '${JOB_NAME}'
                 cd infra/dev/
                 terraform init
                 terraform plan
                 terraform apply -auto-approve
-
+                archiveArtifacts artifacts: 'infra/dev/terraform.tfstate', onlyIfSuccessful: true
                 '''
-//                 copyArtifacts filter: 'infra/dev/terraform.tfstate', projectName: '${JOB_NAME}'
-//                 archiveArtifacts artifacts: 'infra/dev/terraform.tfstate', onlyIfSuccessful: true
+
+
                 //echo 'Provisioning....'
 
             }
