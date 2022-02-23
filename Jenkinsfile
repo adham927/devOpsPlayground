@@ -69,7 +69,7 @@ pipeline {
 //
 //                 '''
 //                 archiveArtifacts artifacts: 'infra/dev/terraform.tfstate', onlyIfSuccessful: true
-                //echo 'Provisioning....'
+                echo 'Provisioning....'
 
             }
         }
