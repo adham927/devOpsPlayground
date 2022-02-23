@@ -59,18 +59,16 @@ pipeline {
             }
             when { allOf { branch "dev"; changeset "infra/**/*.tf"} }
             steps {
-                copyArtifacts filter: 'infra/dev/terraform.tfstate', projectName: '${JOB_NAME}'
-                sh'''
-
-                cd infra/dev/
-                terraform init
-                terraform plan
-                terraform apply -auto-approve
-
-                '''
-                archiveArtifacts artifacts: 'infra/dev/terraform.tfstate', onlyIfSuccessful: true
+//                 copyArtifacts filter: 'infra/dev/terraform.tfstate', projectName: '${JOB_NAME}'
+//                 sh'''
 //
+//                 cd infra/dev/
+//                 terraform init
+//                 terraform plan
+//                 terraform apply -auto-approve
 //
+//                 '''
+//                 archiveArtifacts artifacts: 'infra/dev/terraform.tfstate', onlyIfSuccessful: true
                 //echo 'Provisioning....'
 
             }
@@ -78,15 +76,9 @@ pipeline {
 
 
     }
-//      post {
-//         always {
-//             emailext (
-//                 subject: 'email subject',
-//                 mimeType: 'text/html',
-//                 to: 'ad.amer1989@gmail.com',
-//                 recipientProviders: [[$class: 'CulpritsRecipientProvider'],[$class: 'RequesterRecipientProvider']],
-//                 body: 'test'
-//             )
-//         }
-//     }
+        post {
+        always {
+            emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
+        }
+    }
 }
