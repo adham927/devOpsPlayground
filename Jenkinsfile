@@ -76,13 +76,15 @@ pipeline {
 
 
     }
-       post {
-            always {
-              script {
-                if (currentBuild.currentResult == 'FAILURE') {
-                  step([$class: 'Mailer', notifyEveryUnstableBuild: true, recipients: "ad.amer1989@gmail.com", sendToIndividuals: true])
-                }
-              }
+      post {
+         always {
+             echo 'This will always run'
          }
-     }
+         success {
+             echo 'This will run only if successful'
+         }
+         failure {
+             mail bcc: '', body: "<b>Example</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "ERROR CI: Project name -> ${env.JOB_NAME}", to: "ad.amer1989@gmail.com";
+         }
+      }
 }
