@@ -78,7 +78,7 @@ pipeline {
     }
       post {
          always {
-               mail body: "this message from jenkins just for test configuration...", subject: "from jenkins", to: "ad.amer1989@gmail.com";
+               mail body: "this message from jenkins just for test configuration..", subject: "from jenkins", to: "ad.amer1989@gmail.com";
          }
       }
 }
