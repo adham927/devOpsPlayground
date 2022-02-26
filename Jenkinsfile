@@ -78,10 +78,7 @@ pipeline {
     }
       post {
          always {
-             echo 'This will always run'
-         }
-         success {
-            mail bcc: '', body: "<b>Example</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "ERROR CI: Project name -> ${env.JOB_NAME}", to: "ad.amer1989@gmail.com";
+               mail body: "this message from jenkins just for test configuration", subject: "from jenkins", to: "ad.amer1989@gmail.com";
          }
       }
 }
