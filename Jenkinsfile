@@ -1,8 +1,8 @@
 pipeline {
-    agent any
-     options {
-        copyArtifactPermission('${JOB_NAME}');
-    }
+    agent label 'ec2-fleet'
+//      options {
+//         copyArtifactPermission('${JOB_NAME}');
+//     }
     stages {
         stage('login'){
 
