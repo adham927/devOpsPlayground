@@ -30,7 +30,7 @@ pipeline {
                 cd ../package_demo
                 python3 setup.py sdist bdist_wheel
                 pip3 install twine
-                aws codeartifact login --tool twine --repository artifactory-repo-adham --domain adham-repo --domain-owner 352708296901
+                aws codeartifact login --tool twine --repository artifactory-repo-adham --domain adham-repo --domain-owner 352708296901 --region us-west-2
                 python3 -m twine upload dist/* --repository codeartifact
                 '''
             }
