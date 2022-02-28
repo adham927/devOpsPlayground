@@ -21,6 +21,7 @@ pipeline {
                 echo 'Building..'
                 sh '''
                 ec2-metadata
+
                 echo $USER
                 cd simple_webserver
                 docker build -t web_server_adham:${BUILD_NUMBER} .
