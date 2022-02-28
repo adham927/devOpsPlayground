@@ -4,6 +4,7 @@ pipeline {
 //         copyArtifactPermission('${JOB_NAME}');
 //     }
     stages {
+
 //         stage('login'){
 //
 //            steps{
