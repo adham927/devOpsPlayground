@@ -1,19 +1,20 @@
 pipeline {
-    agent { label 'ec2-fleet' }
+//     agent { label 'ec2-fleet' }
+       agent any
 //      options {
 //         copyArtifactPermission('${JOB_NAME}');
 //     }
     stages {
 
-//         stage('login'){
-//
-//            steps{
-//               sh '''
-//               aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 352708296901.dkr.ecr.us-west-2.amazonaws.com
-//               '''
-//            }
-//
-//         }
+        stage('login'){
+
+           steps{
+              sh '''
+              aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 352708296901.dkr.ecr.us-west-2.amazonaws.com
+              '''
+           }
+
+        }
 
         stage('Build') {
 
@@ -21,12 +22,16 @@ pipeline {
                 echo 'Building..'
                 sh '''
                 ec2-metadata
-
                 echo $USER
                 cd simple_webserver
                 docker build -t web_server_adham:${BUILD_NUMBER} .
                 docker tag web_server_adham:${BUILD_NUMBER} 352708296901.dkr.ecr.us-west-2.amazonaws.com/web_server_adham:${BUILD_NUMBER}
 
+                cd package_demo
+                python3 setup.py sdist bdist_wheel
+                pip install twine
+                aws codeartifact login --tool twine --repository artifactory-repo-adham --domain adham-repo --domain-owner 352708296901
+                python3 -m twine upload dist/* --repository codeartifact
                 '''
             }
         }
