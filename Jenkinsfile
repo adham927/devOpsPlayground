@@ -19,6 +19,7 @@ pipeline {
             steps {
                 echo 'Building..'
                 sh '''
+                ec2-metadata
                 cd simple_webserver
                 docker build -t web_server_adham:${BUILD_NUMBER} .
                 docker tag web_server_adham:${BUILD_NUMBER} 352708296901.dkr.ecr.us-west-2.amazonaws.com/web_server_adham:${BUILD_NUMBER}
