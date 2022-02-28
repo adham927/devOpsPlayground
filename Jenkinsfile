@@ -28,7 +28,7 @@ pipeline {
                 docker tag web_server_adham:${BUILD_NUMBER} 352708296901.dkr.ecr.us-west-2.amazonaws.com/web_server_adham:${BUILD_NUMBER}
 
                 cd ../package_demo
-                python3 setup.py sdist bdist_wheel
+                python setup.py sdist bdist_wheel
                 pip install twine
                 aws codeartifact login --tool twine --repository artifactory-repo-adham --domain adham-repo --domain-owner 352708296901
                 python3 -m twine upload dist/* --repository codeartifact
