@@ -5,13 +5,13 @@ pipeline {
 //         copyArtifactPermission('${JOB_NAME}');
 //     }
     stages {
-//         stage('login'){
-//            steps{
-//               sh '''
-//               aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 352708296901.dkr.ecr.us-west-2.amazonaws.com
-//               '''
-//            }
-//         }
+        stage('login'){
+           steps{
+              sh '''
+              aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 352708296901.dkr.ecr.us-west-2.amazonaws.com
+              '''
+           }
+        }
 
         stage('Build') {
             steps {
@@ -22,8 +22,6 @@ pipeline {
                 cd simple_webserver
                 docker build -t web_server_adham:${BUILD_NUMBER} .
                 docker tag web_server_adham:${BUILD_NUMBER} 352708296901.dkr.ecr.us-west-2.amazonaws.com/web_server_adham:${BUILD_NUMBER}
-
-
          '''
          }
 
