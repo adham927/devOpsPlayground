@@ -1,6 +1,6 @@
 pipeline {
-     agent { label 'ec2-fleet' }
-//       agent any
+//     agent { label 'ec2-fleet' }
+       agent any
 //      options {
 //         copyArtifactPermission('${JOB_NAME}');
 //     }
